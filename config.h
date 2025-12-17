@@ -22,15 +22,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define EE_HANDS
 
-// #define ONESHOT_TAP_TOGGLE
-
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
-// #define USE_MATRIX_I2C
+#define ONESHOT_TAP_TOGGLE 2
+// #define ONESHOT_TIMEOUT 100
 
-// #define QUICK_TAP_TERM 0
-// #define TAPPING_TERM 100
+// #define USE_MATRIX_I2C
 
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLIGHT_EFFECT_BREATHING
