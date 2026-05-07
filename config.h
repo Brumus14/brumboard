@@ -22,13 +22,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define EE_HANDS
 
+#define TAPPING_TERM 175
+
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
-// #define ONESHOT_TAP_TOGGLE 2
-// #define ONESHOT_TIMEOUT 100
+#define RGB_MATRIX_SLEEP
+#define RGB_TRIGGER_ON_KEYDOWN
 
-// #define USE_MATRIX_I2C
+#define SPLIT_ACTIVITY_ENABLE
+#define SPLIT_OLED_ENABLE
+#define OLED_TIMEOUT 40000
+#define RGB_MATRIX_TIMEOUT 40000
 
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLIGHT_EFFECT_BREATHING
