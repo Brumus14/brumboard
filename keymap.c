@@ -1,4 +1,4 @@
-#include "keycodes.h"
+#include "action_layer.h"
 #include QMK_KEYBOARD_H
 
 enum layers {
@@ -9,6 +9,15 @@ enum layers {
     NAV,
     LMOD,
     RMOD,
+    TEST,
+};
+
+const uint16_t PROGMEM fj_combo[] = {KC_F, KC_J, COMBO_END};
+const uint16_t PROGMEM dk_combo[] = {KC_D, KC_K, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(fj_combo, KC_ESC),
+    COMBO(dk_combo, CW_TOGG),
 };
 
 // clang-format off
@@ -17,23 +26,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-         KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+        XXXXXXX,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          MO(LMOD), KC_SPC,  LT(NUM, KC_ESC),     LT(SYM, KC_ENT),   LSFT_T(KC_BSPC),  MO(RMOD)
+                                            XXXXXXX, LT(LMOD, KC_SPC),  LT(NUM, KC_TAB),     LT(SYM, KC_ENT),   LT(RMOD, KC_BSPC),  XXXXXXX
                                         //`--------------------------'  `--------------------------'
     ),
 
+    // Maybe move 0 to the right pinky, then put backspace on thumb key
     [NUM] = LAYOUT_split_3x6_3(
     //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_ASTR,    KC_7,    KC_8,    KC_9, KC_PLUS, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_SLSH,    KC_4,    KC_5,    KC_6, KC_MINS, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_0,    KC_1,    KC_2,    KC_3,  KC_EQL, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,    KC_1,    KC_2,    KC_3,  KC_EQL, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            _______, _______, _______,    _______,  MO(FN), _______
+                                            XXXXXXX, LT(LMOD, KC_SPC),  LT(NUM, KC_TAB),     LT(SYM, KC_ENT),   LT(RMOD, KC_0),  XXXXXXX
                                         //`--------------------------'  `--------------------------'
     ),
 
@@ -45,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F10, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            _______, _______, _______,    _______, _______, _______
+                                            XXXXXXX, LT(LMOD, KC_SPC),  LT(NUM, KC_TAB),     LT(SYM, KC_ENT),   LT(RMOD, KC_BSPC),  XXXXXXX
                                         //`--------------------------'  `--------------------------'
     ),
 
@@ -57,19 +67,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         KC_PIPE, KC_BSLS, KC_RBRC, KC_RCBR, KC_RPRN, KC_AMPR,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            _______, _______, _______,    _______, _______, _______
+                                            XXXXXXX, LT(LMOD, KC_SPC),  LT(NUM, KC_TAB),     LT(SYM, KC_ENT),   LT(RMOD, KC_BSPC),  XXXXXXX
                                         //`--------------------------'  `--------------------------'
     ),
 
     [NAV] = LAYOUT_split_3x6_3(
     //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_PGUP, KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX,
+        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            _______, _______, _______,    _______, _______, _______
+                                            XXXXXXX, LT(LMOD, KC_SPC),  LT(NUM, KC_TAB),     LT(SYM, KC_ENT),   LT(RMOD, KC_BSPC),  XXXXXXX
                                         //`--------------------------'  `--------------------------'
     ),
 
@@ -96,6 +106,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______,    _______, _______, _______
                                         //`--------------------------'  `--------------------------'
     ),
+
+    [TEST] = LAYOUT_split_3x6_3(
+    //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+        _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+    //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+        _______, _______, _______, _______, _______, _______,                      _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _______,
+    //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+        _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+    //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                            _______, _______, _______,    _______, _______, _______
+                                        //`--------------------------'  `--------------------------'
+    ),
 };
 // clang-format on
 
@@ -106,7 +128,20 @@ void keyboard_post_init_user() {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, NUM, SYM, NAV);
+    state = update_tri_layer_state(state, NUM, SYM, NAV);
+
+    bool both_mods = layer_state_cmp(state, LMOD) && layer_state_cmp(state, RMOD);
+
+    if (both_mods) {
+        state &= ~(1 << LMOD);
+        state &= ~(1 << RMOD);
+
+        register_code(KC_LSFT);
+    } else {
+        unregister_code(KC_LSFT);
+    }
+
+    return state;
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
